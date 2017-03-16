@@ -10,15 +10,23 @@
 
       <script type="text/javascript">
 
-      // passing over last known Geo location from Local Storage as an ARRAY
-        var lastPos = JSON.parse(localStorage.getItem('currentPos'));
+      // VARS
+
+      var lastPos = JSON.parse(localStorage.getItem('currentPos')); // passing over last known Geo location from Local Storage as an ARRAY
+      var mapStyle = null;
+
+      // SAVING JSON STYLE FILE INTO VAR
+      $.getJSON("http://localhost:8888/meat-map-v2/mapstyle.json", function(json) {
+        mapStyle = json;
+      });
 
         // Creating Map
         function initMap() {
 
           var map = new google.maps.Map(document.getElementById('meat-map'), {
             center: lastPos,
-            zoom: 16
+            zoom: 16,
+            styles: mapStyle // Styles a map in night mode.
 
           });
           var infoWindow = new google.maps.InfoWindow({map: map});
