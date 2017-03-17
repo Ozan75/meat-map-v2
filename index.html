@@ -28,7 +28,14 @@
             styles: mapStyle // Styles a map in night mode.
           });
 
-          var marker = new google.maps.Marker({position: lastPos, map: map}); // Set special Marker to last position.
+          var icon = {
+              url: "http://localhost:8888/meat-map-v2/svg/geolocation.svg",
+              fillOpacity: .9,
+              anchor: new google.maps.Point(5,30),
+              strokeWeight: 0,
+              scale: 0.8
+          }
+          var marker = new google.maps.Marker({position: lastPos, map: map, icon: icon}); // Set special Marker to last position.
 
           // Try HTML5 geolocation.
           if (navigator.geolocation) {
