@@ -1,6 +1,7 @@
 <!DOCTYPE html>
   <html>
     <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
       <link rel="stylesheet" href="css/styles.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -12,7 +13,7 @@
 
       // VARS
       var lastPos = JSON.parse(localStorage.getItem('currentPos')); // passing over last known Geo location from Local Storage as an ARRAY
-      var mapStyle = null;
+      var mapStyle = "";
 
       // SAVING JSON STYLE FILE INTO VAR
       $.getJSON("http://localhost:8888/meat-map-v2/mapstyle.json", function(json) {
@@ -24,7 +25,7 @@
 
           var map = new google.maps.Map(document.getElementById('meat-map'), {
             center: lastPos,
-            zoom: 16,
+            zoom: 15,
             disableDefaultUI: true,
             styles: mapStyle // Styles a map in night mode.
           });
