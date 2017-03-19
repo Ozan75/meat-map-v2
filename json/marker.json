@@ -1,0 +1,19 @@
+[{
+        "title": "To Beef or not to Beef",
+        "lat": 52.486645,
+        "lng": 13.356394,
+        "description": "<strong>To Beef or not to Beef</strong>Lorem ipsum dolor sit amet"
+    },
+    {
+        "title": "Burgers Berlin",
+        "lat": 52.494450,
+        "lng": 13.353629,
+        "description": "<strong>Burgers Berlin</strong>Lorem ipsum dolor sit amet"
+    },
+    {
+        "title": "Chicago Williams BBQ",
+        "lat": 52.527111,
+        "lng": 13.385833,
+        "description": "<strong>Chicago Williams BBQ</strong>Lorem ipsum dolor sit amet"
+    }
+]
