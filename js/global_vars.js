@@ -9,3 +9,9 @@ var mapStyle;
 $.getJSON("https://www.meat-map.com/json/mapstyles/lunar_landscape.json", function(json) {
     mapStyle = json;
 });
+
+var jsonMarker;
+
+$.getJSON("https://www.meat-map.com/json/marker.json", function(json) {
+    jsonMarker= json;
+});
