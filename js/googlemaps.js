@@ -2,7 +2,7 @@ function initMap() {
 
 var map = new google.maps.Map(document.getElementById('meat-map'), {
   center: lastPos,
-  zoom: 16,
+  zoom: 15,
   disableDefaultUI: true,
   styles: mapStyle // Styles a map in night mode.
 });
@@ -11,9 +11,9 @@ var map = new google.maps.Map(document.getElementById('meat-map'), {
 var icon = {
     url: "https://www.meat-map.com/svg/geolocation.svg",
     fillOpacity: .9,
-    anchor: new google.maps.Point(5,30),
+    anchor: new google.maps.Point(3,18),
     strokeWeight: 0,
-    scale: 0.8
+    scaledSize: new google.maps.Size(30, 36),
 };
 
 var marker = new google.maps.Marker({position: lastPos, map: map, icon: icon}); // Set special Marker to last position.
