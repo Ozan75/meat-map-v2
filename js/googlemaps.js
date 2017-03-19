@@ -1,3 +1,4 @@
+setTimeout(
 function initMap() {
 
     var map = new google.maps.Map(document.getElementById('meat-map'), {
@@ -7,33 +8,13 @@ function initMap() {
         styles: mapStyle // Styles a map in night mode.
     });
 
-    // Creating the JSON data
-    var json = [{
-            "title": "To Beef or not to Beef",
-            "lat": 52.486645,
-            "lng": 13.356394,
-            "description": "<strong>To Beef or not to Beef</strong>Lorem ipsum dolor sit amet"
-        },
-        {
-            "title": "Burgers Berlin",
-            "lat": 52.494450,
-            "lng": 13.353629,
-            "description": "<strong>Burgers Berlin</strong>Lorem ipsum dolor sit amet"
-        },
-        {
-            "title": "Chicago Williams BBQ",
-            "lat": 52.527111,
-            "lng": 13.385833,
-            "description": "<strong>Chicago Williams BBQ</strong>"
-        }
-    ]
 
     // Creating a global infoWindow object that will be reused by all markers
     var infoWindow = new google.maps.InfoWindow();
 
     // Looping through the JSON data
-    for (var i = 0, length = json.length; i < length; i++) {
-        var data = json[i],
+    for (var i = 0, length = jsonMarker.length; i < length; i++) {
+        var data = jsonMarker[i],
             latLng = new google.maps.LatLng(data.lat, data.lng);
 
         // Creating a marker and putting it on the map
@@ -97,7 +78,7 @@ function initMap() {
         // Information send to HandleLocationError Function - Browser doesn't support Geolocation
         handleLocationError(false, marker, map, lastPos); //Should be set to a default LatLang
     };
-}; // Timeout length & END OF MAP INIT
+}, 100); // Timeout length & END OF MAP INIT
 
 function handleLocationError(browserHasGeolocation, geoPosition, map, lastPos) {
     geoPosition.setPosition(lastPos);
