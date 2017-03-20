@@ -1,6 +1,5 @@
-setTimeout(
 function initMap() {
-
+    //CREATE MAP //////////////////////////////////////////
     var map = new google.maps.Map(document.getElementById('meat-map'), {
         center: lastPos,
         zoom: 15,
@@ -8,34 +7,30 @@ function initMap() {
         styles: mapStyle // Styles a map in night mode.
     });
 
-
     // Creating a global infoWindow object that will be reused by all markers
     var infoWindow = new google.maps.InfoWindow();
 
-    // Looping through the JSON data
+    // Looping through the JSONMARKER data
     for (var i = 0, length = jsonMarker.length; i < length; i++) {
         var data = jsonMarker[i],
             latLng = new google.maps.LatLng(data.lat, data.lng);
 
-        // Creating a marker and putting it on the map
+    // Creating a marker and putting it on the map
         var marker = new google.maps.Marker({
             position: latLng,
             map: map,
             title: data.title
         });
 
-        // Creating a closure to retain the correct data, notice how I pass the current data in the loop into the closure (marker, data)
+    // Creating a closure to retain the correct data, notice how I pass the current data in the loop into the closure (marker, data)
         (function(marker, data) {
 
-            // Attaching a click event to the current marker
+    // Attaching a click event to the current marker
             google.maps.event.addListener(marker, "click", function(e) {
                 infoWindow.setContent(data.description);
                 infoWindow.open(map, marker);
             });
-
-
         })(marker, data);
-
     }
 
     // Define Marker
@@ -62,23 +57,23 @@ function initMap() {
                 lng: position.coords.longitude
             };
 
-            // Saving current geo location to Local Storage as a STRING
+    // Saving current geo location to Local Storage as a STRING
             localStorage.setItem('currentPos', JSON.stringify(pos));
             var pos = JSON.parse(localStorage.getItem('currentPos'));
 
-            // Centering Map and repositionig Marker
+    // Centering Map and repositionig Marker
             map.setCenter(pos);
             geoPosition.setPosition(pos);
 
         }, function() {
-            // Information send to HandleLocationError Function - Browser supports Geolocation
+    // Information send to HandleLocationError Function - Browser supports Geolocation
             handleLocationError(true, geoPosition, map, map.getCenter());
         });
     } else {
-        // Information send to HandleLocationError Function - Browser doesn't support Geolocation
+    // Information send to HandleLocationError Function - Browser doesn't support Geolocation
         handleLocationError(false, marker, map, lastPos); //Should be set to a default LatLang
     };
-}, 100); // Timeout length & END OF MAP INIT
+}; //END OF MAP INIT //////////////////////////////////////////
 
 function handleLocationError(browserHasGeolocation, geoPosition, map, lastPos) {
     geoPosition.setPosition(lastPos);
