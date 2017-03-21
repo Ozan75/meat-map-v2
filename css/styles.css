@@ -33,6 +33,10 @@
     margin-top: 10px;
 }
 
+.map_drag {
+  opacity: 0.25;
+}
+
 
 /* Optional: Makes the sample page fill the window. */
 

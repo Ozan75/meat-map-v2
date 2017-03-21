@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="38px" height="45px" viewBox="0 0 38 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
-    <title>Group</title>
+    <title>blue-marker copy</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <radialGradient cx="54.1323602%" cy="-78.0052432%" fx="54.1323602%" fy="-78.0052432%" r="260.201259%" id="radialGradient-1">
-            <stop stop-color="#FFEDD4" offset="0%"></stop>
-            <stop stop-color="#53ADFE" offset="29.9489064%"></stop>
-            <stop stop-color="#3E2ED0" offset="100%"></stop>
+        <radialGradient cx="50%" cy="320.715332%" fx="50%" fy="320.715332%" r="460.511045%" id="radialGradient-1">
+            <stop stop-color="#180F6B" offset="0%"></stop>
+            <stop stop-color="#3522E8" offset="33.1672922%"></stop>
+            <stop stop-color="#24DEE8" offset="66.8713297%"></stop>
+            <stop stop-color="#B4ED50" offset="100%"></stop>
         </radialGradient>
     </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group">
-            <path d="M15.0196046,44.8274061 C15.0312131,44.8423735 15.0372396,44.85 15.0372396,44.85 C15.0372396,44.85 34.3066996,36.2513672 37.4479167,29.925 C39.2957845,26.20342 35.4080531,23.1149401 28.5910893,22.5261507 C24.9555314,33.2613344 15.5071201,44.2640624 15.0196046,44.8274061 Z" id="Combined-Shape" fill-opacity="0.33" fill="#000000"></path>
-            <path d="M15,44.85 C15,44.85 30,27.6527344 30,15 C30,6.71572875 23.2842712,0 15,0 C6.71572875,0 3.63631049e-16,6.71572875 0,15 C0,27.7523437 15,44.85 15,44.85 Z" id="Oval" fill="url(#radialGradient-1)"></path>
+        <g id="blue-marker-copy">
+            <ellipse id="Combined-Shape-Copy-2" fill="#2A9BE8" opacity="0.33" cx="24" cy="24" rx="24" ry="24"></ellipse>
+            <circle id="Combined-Shape-Copy" fill-opacity="0.33" fill="#000000" cx="25" cy="26" r="8"></circle>
+            <circle id="Combined-Shape-Copy-3" fill="url(#radialGradient-1)" cx="24" cy="24" r="8"></circle>
         </g>
     </g>
 </svg>
