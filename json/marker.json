@@ -15,5 +15,41 @@
         "lat": 52.527111,
         "lng": 13.385833,
         "description": "<strong>Chicago Williams BBQ</strong>Lorem ipsum dolor sit amet"
+    },
+    {
+        "title": "Burgeramt",
+        "lat": 52.510266,
+        "lng": 13.459745,
+        "description": "<strong>Burgeramt</strong>Lorem ipsum dolor sit amet"
+    },
+    {
+        "title": "Burgers Berlin",
+        "lat": 52.504778,
+        "lng": 13.467770,
+        "description": "<strong>Burgers Berlin</strong>Lorem ipsum dolor sit amet"
+    },
+    {
+        "title": "Burgermeister",
+        "lat": 52.501116,
+        "lng": 13.442328,
+        "description": "<strong>Burgermeister</strong>Lorem ipsum dolor sit amet"
+    },
+    {
+        "title": "Big Stuff Smoked BBQ",
+        "lat": 52.502178,
+        "lng": 13.431917,
+        "description": "<strong>Big Stuff Smoked BBQ</strong>Lorem ipsum dolor sit amet"
+    },
+    {
+        "title": "Konak Grill",
+        "lat": 52.499357,
+        "lng": 13.416847,
+        "description": "<strong>Konak Grill</strong>Lorem ipsum dolor sit amet"
+    },
+    {
+        "title": "Atlantik Fischladen",
+        "lat": 52.495442,
+        "lng": 13.360866,
+        "description": "<strong>Konak Grill</strong>Lorem ipsum dolor sit amet"
     }
 ]
