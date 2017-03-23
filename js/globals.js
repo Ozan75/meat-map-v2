@@ -23,10 +23,10 @@ function loadScript(url, callback) {
 ////////////////////////////////////////////////////////////////////////////////
 
 // 1. passing over last known Geo location from Local Storage as an ARRAY
-var lastPos = JSON.parse(localStorage.getItem('currentPos'));
-var jsonMarker;
-var mapStyle;
-var map;
+var pos = JSON.parse(localStorage.getItem('currentPos'));
+var jsonMarker = "";
+var mapStyle = "";
+var map = "";
 
 // 2. DEFINING VAR & SAVING JSON STYLE FILE INTO VAR
 $.getJSON("https://www.meat-map.com/json/mapstyles/lunar_landscape.json", function(json) {
