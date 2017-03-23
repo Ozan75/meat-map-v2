@@ -4,7 +4,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 
     //CREATE MAP
     var map = new google.maps.Map(document.getElementById('meat-map'), {
-        center: lastPos,
+        center: pos,
         zoom: 15,
         disableDefaultUI: true,
         styles: mapStyle // Styles a map in night mode.
@@ -73,7 +73,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
 
     var geoPosition = new google.maps.Marker({
-        position: lastPos,
+        position: pos,
         map: map,
         icon: positionMarker
     });
@@ -112,6 +112,6 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 function handleLocationError(browserHasGeolocation, geoPosition, map, pos) {
-    geoPosition.setPosition(lastPos);
-    map.setCenter(lastPos);
+    geoPosition.setPosition(pos);
+    map.setCenter(pos);
 }
