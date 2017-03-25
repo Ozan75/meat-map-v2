@@ -44,32 +44,5 @@ $.getJSON("https://www.meat-map.com/json/marker.json", function(json) {
 // Functions
 ////////////////////////////////////////////////////////////////////////////////
 
-// 1. Geolocation
-var locateMe = function() {
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-
-            // Saving current geo location to Local Storage as a STRING
-            localStorage.setItem('currentPos', JSON.stringify(pos));
-            var pos = JSON.parse(localStorage.getItem('currentPos'));
-
-            // Centering Map and repositionig Marker
-            map.setCenter(pos);
-            geoPosition.setPosition(pos);
-
-        }, function() {
-            // Information send to HandleLocationError Function - Browser supports Geolocation
-            handleLocationError(true, geoPosition, map, map.getCenter());
-        });
-    } else {
-        // Information send to HandleLocationError Function - Browser doesn't support Geolocation
-        handleLocationError(false, geoPosition, map, map.getCenter()); //Should be set to a default LatLang
-    };
-};
 
 //
