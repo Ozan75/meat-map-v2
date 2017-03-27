@@ -1,9 +1,13 @@
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 
-#meat-map {
-    height: 105%;
-}
+ /* Optional: Makes the sample page fill the window. */
+
+ html, body {
+     height: 100%;
+     margin: 0;
+     padding: 0;
+ }
 
 #header {
   width: 100%;
@@ -33,15 +37,19 @@
     margin-top: 10px;
 }
 
+#meat-map {
+    height: 105%;
+}
+
 .map_drag {
   opacity: 0.25;
 }
 
+#infobox {
+  min-height: 400px;
+  width: 100%;
+  background-color: #fefefe;
+  position: absolute;
+  z-index: 99;
 
-/* Optional: Makes the sample page fill the window. */
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
 }
