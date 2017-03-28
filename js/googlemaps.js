@@ -105,7 +105,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             // Attaching a click event to the current marker
             google.maps.event.addListener(marker, "click", function(e) {
 
-                map.setCenter(marker.getPosition());
+                map.panTo(marker.getPosition());
 
                 history.pushState(data, null, "?=" + data["id"]);
                 //infoWindow.setContent(data.description);
@@ -123,7 +123,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         // if history back ends at meat-map.com load geolocation instead of Marker
         if (event.state === null) {
 
-            map.setCenter(pos);
+            map.panTo(pos);
             geoPosition.setPosition(pos);
 
         } else {
@@ -144,7 +144,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 
             // Creating a closure to retain the correct data, notice how I pass the current data in the loop into the closure (marker, data)
             (function(marker, data) {
-                map.setCenter(marker.getPosition());
+                map.panTo(marker.getPosition());
 
             })(marker, data);
 
