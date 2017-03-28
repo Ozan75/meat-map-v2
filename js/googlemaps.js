@@ -4,6 +4,43 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 
 
     ////////////////////////////////////////////////////////////////////////////
+    // Create Map and Elements
+    ////////////////////////////////////////////////////////////////////////////
+    var map = new google.maps.Map(document.getElementById('meat-map'), {
+        center: pos,
+        zoom: 15,
+        disableDefaultUI: true,
+        styles: mapStyle, // Styles a map in night mode.
+        gestureHandling: 'greedy'
+    });
+
+    // Creating redMarker
+    var redMarker = {
+        url: "https://www.meat-map.com/svg/marker-red.svg",
+        fillOpacity: .9,
+        anchor: new google.maps.Point(5, 50),
+        strokeWeight: 0,
+        scaledSize: new google.maps.Size(43, 49),
+    };
+
+    // Creating blue marker
+    var positionMarker = {
+        url: "https://www.meat-map.com/svg/geolocation.svg",
+        fillOpacity: .9,
+        anchor: new google.maps.Point(24, 24),
+        strokeWeight: 0,
+        scaledSize: new google.maps.Size(48, 48)
+    };
+
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Creating a global infoWindow object that will be reused by all markers
+    ////////////////////////////////////////////////////////////////////////////
+
+    var infoWindow = new google.maps.InfoWindow();
+
+
+    ////////////////////////////////////////////////////////////////////////////
     // Try HTML5 geolocation if Browser has no URL ID, Otherwise go to Marker by ID
     ////////////////////////////////////////////////////////////////////////////
 
@@ -62,54 +99,20 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 
         // Creating a closure to retain the correct data, notice how I pass the current data in the loop into the closure (marker, data)
         (function(marker, data) {
-
-            //$('#meat-map').animate({
-            //    'height': '60%'
-            //}, 500);
             map.setCenter(marker.getPosition());
-            //var d = document.getElementById("infobox");
-            //d.className += "box_slide_in";
-            //infoWindow.setContent(data.description);
-            //infoWindow.open(map, marker);
+
         })(marker, data);
     };
 
+    ////////////////////////////////////////////////////////////////////////////
+    // Geolocation Marker
+    ////////////////////////////////////////////////////////////////////////////
 
-    ////////////////////////////////////////////////////////////////////////////
-    // Create Map and Elements
-    ////////////////////////////////////////////////////////////////////////////
-    var map = new google.maps.Map(document.getElementById('meat-map'), {
-        center: pos,
-        zoom: 15,
-        disableDefaultUI: true,
-        styles: mapStyle, // Styles a map in night mode.
-        gestureHandling: 'greedy'
+    var geoPosition = new google.maps.Marker({
+        position: pos,
+        map: map,
+        icon: positionMarker
     });
-
-    // Creating redMarker
-    var redMarker = {
-        url: "https://www.meat-map.com/svg/marker-red.svg",
-        fillOpacity: .9,
-        anchor: new google.maps.Point(5, 50),
-        strokeWeight: 0,
-        scaledSize: new google.maps.Size(43, 49),
-    };
-
-    // Creating blue marker
-    var positionMarker = {
-        url: "https://www.meat-map.com/svg/geolocation.svg",
-        fillOpacity: .9,
-        anchor: new google.maps.Point(24, 24),
-        strokeWeight: 0,
-        scaledSize: new google.maps.Size(48, 48)
-    };
-
-
-    ////////////////////////////////////////////////////////////////////////////
-    // Creating a global infoWindow object that will be reused by all markers
-    ////////////////////////////////////////////////////////////////////////////
-
-    var infoWindow = new google.maps.InfoWindow();
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -133,10 +136,8 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         (function(marker, data) {
             // Attaching a click event to the current marker
             google.maps.event.addListener(marker, "click", function(e) {
-                //$('#meat-map').animate({'height': '60%'}, 500);
+
                 map.setCenter(marker.getPosition());
-                //var d = document.getElementById("infobox");
-                //d.className += "box_slide_in";
 
                 history.pushState(data, null, "?=" + data["id"]);
                 //infoWindow.setContent(data.description);
@@ -144,17 +145,6 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             });
         })(marker, data);
     };
-
-    ////////////////////////////////////////////////////////////////////////////
-    // Geolocation Marker
-    ////////////////////////////////////////////////////////////////////////////
-
-    var geoPosition = new google.maps.Marker({
-        position: pos,
-        map: map,
-        icon: positionMarker
-    });
-
 
     ////////////////////////////////////////////////////////////////////////////
     // Saving and calling Markers in Browser history
@@ -187,16 +177,10 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             // Creating a closure to retain the correct data, notice how I pass the current data in the loop into the closure (marker, data)
             (function(marker, data) {
                 map.setCenter(marker.getPosition());
-                //var d = document.getElementById("infobox");
-                //d.className += "box_slide_in";
-                //infoWindow.setContent(data.description);
-                //infoWindow.open(map, marker);
+
             })(marker, data);
 
         };
-
-
-
     };
 
 
@@ -208,9 +192,6 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
     google.maps.event.addListener(map, 'drag', function() {
         var d = document.getElementById("header");
         d.className += " map_drag";
-        $('#meat-map').animate({
-            'height': '100%'
-        }, 200);
     });
 
     // When dragging ends

@@ -46,10 +46,11 @@
 }
 
 #infobox {
-  min-height: 400px;
+  min-height: 800px;
   width: 100%;
   background-color: #fefefe;
   position: absolute;
   z-index: 99;
+  margin-top: 0px;
 
 }
