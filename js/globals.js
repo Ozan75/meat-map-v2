@@ -25,6 +25,9 @@ function loadScript(url, callback) {
 // 1. passing over last known Geo location from Local Storage as an ARRAY
 var pos = JSON.parse(localStorage.getItem('currentPos'));
 var jsonMarker = "";
+var getUrl = window.location.href; //https://www.meat-map.com/?=1
+var cleanURL = window.location.host; //www.meat-map.com
+var urlID = window.location.href.replace('https://www.meat-map.com/?=', ''); //1
 var mapStyle = "";
 var map = "";
 
@@ -45,4 +48,24 @@ $.getJSON("https://www.meat-map.com/json/marker.json", function(json) {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-//
+var geoLocation = function() {
+
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser");
+    }
+
+    function success(position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        // Saving current geo location to Local Storage as a STRING
+        localStorage.setItem('currentPos', JSON.stringify(pos));
+    }
+
+    function error() {
+        alert("Unable to retrieve your location");
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error);
+};
