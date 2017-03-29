@@ -15,7 +15,9 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         zoom: 15,
         disableDefaultUI: true,
         styles: mapStyle, // Styles a map in night mode.
-        gestureHandling: 'greedy'
+        gestureHandling: 'greedy',
+        clickableIcons: false
+
     });
 
     // redMarker
@@ -106,8 +108,10 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             google.maps.event.addListener(marker, "click", function(e) {
 
                 map.panTo(marker.getPosition());
+                map.setZoom(15);
 
                 history.pushState(data, null, "?=" + data["id"]);
+                
                 //infoWindow.setContent(data.description);
                 //infoWindow.open(map, marker);
             });
@@ -124,6 +128,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         if (event.state === null) {
 
             map.panTo(pos);
+            map.setZoom(15);
             geoPosition.setPosition(pos);
 
         } else {
@@ -145,6 +150,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             // Creating a closure to retain the correct data, notice how I pass the current data in the loop into the closure (marker, data)
             (function(marker, data) {
                 map.panTo(marker.getPosition());
+                map.setZoom(15);
 
             })(marker, data);
 
@@ -181,4 +187,5 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 function handleLocationError(browserHasGeolocation, geoPosition, map, pos) {
     geoPosition.setPosition(pos);
     map.setCenter(pos);
+    map.setZoom(15);
 }

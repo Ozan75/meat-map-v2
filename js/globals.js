@@ -52,7 +52,7 @@ var geoLocation = function() {
 
     if (!navigator.geolocation) {
         alert("Geolocation is not supported by your browser");
-    }
+    };
 
     function success(position) {
         var pos = {
@@ -61,7 +61,7 @@ var geoLocation = function() {
         };
         // Saving current geo location to Local Storage as a STRING
         localStorage.setItem('currentPos', JSON.stringify(pos));
-    }
+    };
 
     function error() {
         alert("Unable to retrieve your location");
