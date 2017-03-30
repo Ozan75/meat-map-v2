@@ -111,7 +111,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
                 map.setZoom(15);
 
                 history.pushState(data, null, "?=" + data["id"]);
-                
+
                 //infoWindow.setContent(data.description);
                 //infoWindow.open(map, marker);
             });
@@ -130,6 +130,8 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             map.panTo(pos);
             map.setZoom(15);
             geoPosition.setPosition(pos);
+
+            history.pushState(data, null, "?=" + data["id"]);
 
         } else {
 
@@ -164,7 +166,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 
     // When dragging
     google.maps.event.addListener(map, 'drag', function() {
-        var d = document.getElementById("header");
+        var d       = document.getElementById("header");
         d.className += " map_drag";
     });
 

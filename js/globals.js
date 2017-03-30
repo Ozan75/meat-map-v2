@@ -23,13 +23,13 @@ function loadScript(url, callback) {
 ////////////////////////////////////////////////////////////////////////////////
 
 // 1. passing over last known Geo location from Local Storage as an ARRAY
-var pos = JSON.parse(localStorage.getItem('currentPos'));
-var jsonMarker = "";
-var getUrl = window.location.href; //https://www.meat-map.com/?=1
-var cleanURL = window.location.host; //www.meat-map.com
-var urlID = window.location.href.replace('https://www.meat-map.com/?=', ''); //1
-var mapStyle = "";
-var map = "";
+var pos         = JSON.parse(localStorage.getItem('currentPos'));
+var getUrl      = window.location.href; //https://www.meat-map.com/?=1
+var cleanURL    = window.location.host; //www.meat-map.com
+var urlID       = window.location.href.replace('https://www.meat-map.com/?=', ''); //1
+var jsonMarker  = "";
+var mapStyle    = "";
+var map         = "";
 
 // 2. DEFINING VAR & SAVING JSON STYLE FILE INTO VAR
 $.getJSON("https://www.meat-map.com/json/mapstyles/lunar_landscape.json", function(json) {
