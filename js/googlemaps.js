@@ -24,7 +24,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
     var redMarker = {
         url: "https://www.meat-map.com/svg/marker-red.svg",
         fillOpacity: .9,
-        anchor: new google.maps.Point(5, 50),
+        anchor: new google.maps.Point(15, 50),
         strokeWeight: 0,
         scaledSize: new google.maps.Size(43, 49),
     };
@@ -106,15 +106,20 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         (function(marker, data) {
             // Attaching a click event to the current marker
             google.maps.event.addListener(marker, "click", function(e) {
-
+                $('#infobox').addClass("shadow");
+                $('#infobox').animate({ marginTop: "-" + screenHeight / 2}, 500);
                 map.panTo(marker.getPosition());
+                map.panBy(0, screenHeight / 7);
                 map.setZoom(15);
 
                 history.pushState(data, null, "?=" + data["id"]);
-
                 //infoWindow.setContent(data.description);
                 //infoWindow.open(map, marker);
             });
+
+
+
+
         })(marker, data);
     };
 
@@ -163,17 +168,27 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     // Adding transparency class to overlying header while drgging map
     ////////////////////////////////////////////////////////////////////////////
+    google.maps.event.addListener(map, 'click', function(){
+        $('#infobox').removeClass("shadow");
+        $('#infobox').animate({ marginTop: '0'}, 500);
+        map.panTo(marker.getPosition());
+        map.setZoom(15);
+    });
 
     // When dragging
-    google.maps.event.addListener(map, 'drag', function() {
+    google.maps.event.addListener(map, 'dragstart', function() {
         var d       = document.getElementById("header");
         d.className += " map_drag";
+        $('#infobox').removeClass("shadow");
+        $('#infobox').animate({ marginTop: '0'}, 500);
     });
 
     // When dragging ends
     google.maps.event.addListener(map, 'dragend', function() {
         var d = document.getElementById("header");
         d.className -= " map_drag";
+        $('#infobox').removeClass("shadow");
+        $('#infobox').animate({ marginTop: '0'}, 500);
     });
 
 

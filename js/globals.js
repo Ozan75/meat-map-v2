@@ -27,6 +27,7 @@ var pos         = JSON.parse(localStorage.getItem('currentPos'));
 var getUrl      = window.location.href; //https://www.meat-map.com/?=1
 var cleanURL    = window.location.host; //www.meat-map.com
 var urlID       = window.location.href.replace('https://www.meat-map.com/?=', ''); //1
+var screenHeight = $(window).height();
 var jsonMarker  = "";
 var mapStyle    = "";
 var map         = "";
