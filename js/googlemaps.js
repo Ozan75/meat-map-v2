@@ -29,7 +29,16 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         scaledSize: new google.maps.Size(43, 49),
     };
 
-    // blueMarker
+    // BlueMarker
+    var blueMarker = {
+        url: "https://www.meat-map.com/svg/marker-blue.svg",
+        fillOpacity: .9,
+        anchor: new google.maps.Point(24, 24),
+        strokeWeight: 0,
+        scaledSize: new google.maps.Size(48, 48)
+    };
+
+    // positionMarker
     var positionMarker = {
         url: "https://www.meat-map.com/svg/geolocation.svg",
         fillOpacity: .9,
@@ -50,6 +59,12 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         map: map,
         icon: positionMarker
     });
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Defiing selectedMarker
+    ////////////////////////////////////////////////////////////////////////////
+
+    var selectedMarker
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -79,7 +94,12 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 
         // Creating a closure to retain the correct data, notice how I pass the current data in the loop into the closure (marker, data)
         (function(marker, data) {
-            map.setCenter(marker.getPosition());
+            $('#infobox').animate({
+                marginTop: "-" + screenHeight / 2
+            }, 500);
+            map.panTo(marker.getPosition());
+            map.panBy(0, screenHeight / 7);
+            map.setZoom(15);
 
         })(marker, data);
     };
@@ -98,7 +118,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         var marker = new google.maps.Marker({
             position: latLng,
             map: map,
-            icon: redMarker,
+            icon: blueMarker,
             title: data.title
         });
 
@@ -106,12 +126,24 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         (function(marker, data) {
             // Attaching a click event to the current marker
             google.maps.event.addListener(marker, "click", function(e) {
-                $('#infobox').addClass("shadow");
-                $('#infobox').animate({ marginTop: "-" + screenHeight / 2}, 500);
+
+                // change selected Marker to selected state
+                if (selectedMarker) {
+                    selectedMarker.setIcon(blueMarker);
+                    geoPosition.setIcon(positionMarker);
+                }
+                marker.setIcon(redMarker);
+                selectedMarker = marker;
+
+                // Animate content Box into view
+                $('#infobox').animate({
+                    marginTop: "-" + screenHeight / 2
+                }, 500);
                 map.panTo(marker.getPosition());
                 map.panBy(0, screenHeight / 7);
                 map.setZoom(15);
 
+                // Add selection to Browser history
                 history.pushState(data, null, "?=" + data["id"]);
                 //infoWindow.setContent(data.description);
                 //infoWindow.open(map, marker);
@@ -168,27 +200,31 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     // Adding transparency class to overlying header while drgging map
     ////////////////////////////////////////////////////////////////////////////
-    google.maps.event.addListener(map, 'click', function(){
-        $('#infobox').removeClass("shadow");
-        $('#infobox').animate({ marginTop: '0'}, 500);
+
+    google.maps.event.addListener(map, 'click', function() {
+        $('#infobox').animate({
+            marginTop: '0'
+        }, 500);
         map.panTo(marker.getPosition());
         map.setZoom(15);
     });
 
     // When dragging
     google.maps.event.addListener(map, 'dragstart', function() {
-        var d       = document.getElementById("header");
+        var d = document.getElementById("header");
         d.className += " map_drag";
-        $('#infobox').removeClass("shadow");
-        $('#infobox').animate({ marginTop: '0'}, 500);
+        $('#infobox').animate({
+            marginTop: '0'
+        }, 500);
     });
 
     // When dragging ends
     google.maps.event.addListener(map, 'dragend', function() {
         var d = document.getElementById("header");
         d.className -= " map_drag";
-        $('#infobox').removeClass("shadow");
-        $('#infobox').animate({ marginTop: '0'}, 500);
+        $('#infobox').animate({
+            marginTop: '0'
+        }, 500);
     });
 
 
