@@ -5,6 +5,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
     loadScript("js/globals.js", geoLocation);
     console.log(pos);
 
+
     ////////////////////////////////////////////////////////////////////////////
     // Defining Map and Elements
     ////////////////////////////////////////////////////////////////////////////
@@ -20,22 +21,22 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 
     });
 
-    // redMarker
-    var redMarker = {
+    // SelectedMarker
+    var selectedMarker = {
         url: "https://www.meat-map.com/svg/marker-red.svg",
         fillOpacity: .9,
-        anchor: new google.maps.Point(15, 50),
+        anchor: new google.maps.Point(16, 50),
         strokeWeight: 0,
-        scaledSize: new google.maps.Size(43, 49),
+        scaledSize: new google.maps.Size(43, 50)
     };
 
-    // BlueMarker
-    var blueMarker = {
+    // DefaultMarker
+    var defaultMarker = {
         url: "https://www.meat-map.com/svg/marker-blue.svg",
         fillOpacity: .9,
-        anchor: new google.maps.Point(24, 24),
+        anchor: new google.maps.Point(16, 50),
         strokeWeight: 0,
-        scaledSize: new google.maps.Size(48, 48)
+        scaledSize: new google.maps.Size(43, 50)
     };
 
     // positionMarker
@@ -50,8 +51,9 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
     // InfoWindow
     var infoWindow = new google.maps.InfoWindow();
 
+
     ////////////////////////////////////////////////////////////////////////////
-    // Geolocation Marker
+    // Set geoposition Marker
     ////////////////////////////////////////////////////////////////////////////
 
     var geoPosition = new google.maps.Marker({
@@ -60,15 +62,9 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         icon: positionMarker
     });
 
-    ////////////////////////////////////////////////////////////////////////////
-    // Defiing selectedMarker
-    ////////////////////////////////////////////////////////////////////////////
-
-    var selectedMarker
-
 
     ////////////////////////////////////////////////////////////////////////////
-    // check URL and center on Marker
+    // check URL and set center on Marker
     ////////////////////////////////////////////////////////////////////////////
 
     if (getUrl === "https://" + cleanURL + "/" || getUrl === "https://" + cleanURL) {
@@ -88,20 +84,14 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         var marker = new google.maps.Marker({
             position: latLng,
             map: map,
-            icon: redMarker,
+            icon: defaultMarker,
             title: data.title
         });
 
-        // Creating a closure to retain the correct data, notice how I pass the current data in the loop into the closure (marker, data)
-        (function(marker, data) {
-            $('#infobox').animate({
-                marginTop: "-" + screenHeight / 2
-            }, 500);
-            map.panTo(marker.getPosition());
-            map.panBy(0, screenHeight / 7);
-            map.setZoom(15);
-
-        })(marker, data);
+        document.getElementById("infobox").style.marginTop = "-50%";
+        map.panTo(marker.getPosition());
+        map.panBy(0, screenHeight / 7);
+        map.setZoom(15);
     };
 
 
@@ -118,7 +108,7 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         var marker = new google.maps.Marker({
             position: latLng,
             map: map,
-            icon: blueMarker,
+            icon: defaultMarker,
             title: data.title
         });
 
@@ -127,33 +117,18 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             // Attaching a click event to the current marker
             google.maps.event.addListener(marker, "click", function(e) {
 
-                // change selected Marker to selected state
-                if (selectedMarker) {
-                    selectedMarker.setIcon(blueMarker);
-                    geoPosition.setIcon(positionMarker);
-                }
-                marker.setIcon(redMarker);
-                selectedMarker = marker;
-
-                // Animate content Box into view
-                $('#infobox').animate({
-                    marginTop: "-" + screenHeight / 2
-                }, 500);
+                document.getElementById("infobox").style.marginTop = "-50%";
                 map.panTo(marker.getPosition());
                 map.panBy(0, screenHeight / 7);
                 map.setZoom(15);
 
-                // Add selection to Browser history
                 history.pushState(data, null, "?=" + data["id"]);
                 //infoWindow.setContent(data.description);
                 //infoWindow.open(map, marker);
             });
-
-
-
-
         })(marker, data);
     };
+
 
     ////////////////////////////////////////////////////////////////////////////
     // Saving and calling Markers in Browser history
@@ -164,11 +139,12 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         // if history back ends at meat-map.com load geolocation instead of Marker
         if (event.state === null) {
 
+            document.getElementById("infobox").style.marginTop = "0";
             map.panTo(pos);
             map.setZoom(15);
             geoPosition.setPosition(pos);
 
-            history.pushState(data, null, "?=" + data["id"]);
+            //history.pushState(data, null, "?=" + data["id"]);
 
         } else {
 
@@ -177,21 +153,10 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             var data = jsonMarker[i],
                 latLng = new google.maps.LatLng(data.lat, data.lng);
 
-
-            // Putting Marker on the map
-            var marker = new google.maps.Marker({
-                position: latLng,
-                map: map,
-                icon: redMarker,
-                title: data.title
-            });
-
-            // Creating a closure to retain the correct data, notice how I pass the current data in the loop into the closure (marker, data)
-            (function(marker, data) {
-                map.panTo(marker.getPosition());
-                map.setZoom(15);
-
-            })(marker, data);
+            document.getElementById("infobox").style.marginTop = "-50%";
+            map.panTo(marker.getPosition());
+            map.panBy(0, screenHeight / 7);
+            map.setZoom(15);
 
         };
     };
@@ -200,31 +165,22 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
     // Adding transparency class to overlying header while drgging map
     ////////////////////////////////////////////////////////////////////////////
-
     google.maps.event.addListener(map, 'click', function() {
-        $('#infobox').animate({
-            marginTop: '0'
-        }, 500);
-        map.panTo(marker.getPosition());
-        map.setZoom(15);
+        document.getElementById("infobox").style.marginTop = "0";
     });
 
     // When dragging
     google.maps.event.addListener(map, 'dragstart', function() {
         var d = document.getElementById("header");
         d.className += " map_drag";
-        $('#infobox').animate({
-            marginTop: '0'
-        }, 500);
+        document.getElementById("infobox").style.marginTop = "0";
     });
 
     // When dragging ends
     google.maps.event.addListener(map, 'dragend', function() {
         var d = document.getElementById("header");
         d.className -= " map_drag";
-        $('#infobox').animate({
-            marginTop: '0'
-        }, 500);
+        document.getElementById("infobox").style.marginTop = "0";
     });
 
 
