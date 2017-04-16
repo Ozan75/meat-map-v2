@@ -88,9 +88,9 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             title: data.title
         });
 
-        document.getElementById("infobox").style.marginTop = "-50%";
+        document.getElementById("infobox").style.marginTop = "-" + screenHeight * 0.4 + "px";
         map.panTo(marker.getPosition());
-        map.panBy(0, screenHeight / 7);
+        //map.panBy(0, screenHeight / 7);
         map.setZoom(15);
     };
 
@@ -117,9 +117,9 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             // Attaching a click event to the current marker
             google.maps.event.addListener(marker, "click", function(e) {
 
-                document.getElementById("infobox").style.marginTop = "-50%";
+                document.getElementById("infobox").style.marginTop = "-" + screenHeight * 0.4 + "px";
                 map.panTo(marker.getPosition());
-                map.panBy(0, screenHeight / 7);
+                //map.panBy(0, screenHeight / 7);
                 map.setZoom(15);
 
                 history.pushState(data, null, "?=" + data["id"]);
@@ -144,18 +144,28 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             map.setZoom(15);
             geoPosition.setPosition(pos);
 
-            //history.pushState(data, null, "?=" + data["id"]);
+            history.pushState(data, null, "?=" + data["id"]);
 
         } else {
 
+
+            // loading the Marker related to id on History ID base
             var id = JSON.stringify(event.state.id);
             var i = id - 1;
             var data = jsonMarker[i],
                 latLng = new google.maps.LatLng(data.lat, data.lng);
 
-            document.getElementById("infobox").style.marginTop = "-50%";
+            // Putting Marker on the map
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                icon: defaultMarker,
+                title: data.title
+            });
+
+            document.getElementById("infobox").style.marginTop = "-" + screenHeight * 0.4 + "px";
             map.panTo(marker.getPosition());
-            map.panBy(0, screenHeight / 7);
+            //map.panBy(0, screenHeight / 7);
             map.setZoom(15);
 
         };
