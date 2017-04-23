@@ -23,14 +23,25 @@ function loadScript(url, callback) {
 ////////////////////////////////////////////////////////////////////////////////
 
 // 1. passing over last known Geo location from Local Storage as an ARRAY
-var pos         = JSON.parse(localStorage.getItem('currentPos'));
-var getUrl      = window.location.href; //https://www.meat-map.com/?=1
-var cleanURL    = window.location.host; //www.meat-map.com
-var urlID       = window.location.href.replace('https://www.meat-map.com/?=', ''); //1
+var pos = JSON.parse(localStorage.getItem('currentPos'));
+
+if (pos == null) {
+    var pos = {
+        lat: 52.531677,
+        lng: 13.381777
+    }
+} else {
+    var pos = pos
+};
+
+var getUrl = window.location.href; //https://www.meat-map.com/?=1
+var cleanURL = window.location.host; //www.meat-map.com
+var urlID = window.location.href.replace('https://www.meat-map.com/?=', ''); //1
 var screenHeight = $(window).height();
-var jsonMarker  = "";
-var mapStyle    = "";
-var map         = "";
+var jsonMarker = "";
+var mapStyle = "";
+var map = "";
+
 
 // 2. DEFINING VAR & SAVING JSON STYLE FILE INTO VAR
 $.getJSON("https://www.meat-map.com/json/mapstyles/lunar_landscape.json", function(json) {
@@ -47,26 +58,3 @@ $.getJSON("https://www.meat-map.com/json/marker.json", function(json) {
 ////////////////////////////////////////////////////////////////////////////////
 // Functions
 ////////////////////////////////////////////////////////////////////////////////
-
-
-var geoLocation = function() {
-
-    if (!navigator.geolocation) {
-        alert("Geolocation is not supported by your browser");
-    };
-
-    function success(position) {
-        var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        };
-        // Saving current geo location to Local Storage as a STRING
-        localStorage.setItem('currentPos', JSON.stringify(pos));
-    };
-
-    function error() {
-        alert("Unable to retrieve your location");
-    };
-
-    navigator.geolocation.getCurrentPosition(success, error);
-};

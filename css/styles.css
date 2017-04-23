@@ -25,6 +25,7 @@ html, body {
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000', GradientType=0);
     /* IE6-9 */
+    text-align: center;
 }
 
 #logo {
@@ -36,6 +37,18 @@ html, body {
     background-position: center;
     background-size: 167px 90px;
     margin-top: 10px;
+}
+
+#refresh {
+    width: 45px;
+    height: 45px;
+    display: block;
+    background-image: url("https://www.meat-map.com/svg/refresh.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 35px;
+    float: right;
+    margin: 25px 20px 0 0;
 }
 
 #meat-map {
