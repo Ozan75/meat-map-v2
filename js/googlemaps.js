@@ -2,8 +2,7 @@
 function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
 
-
-    console.log(pos);
+    console.log(pos + " Launch");
 
 
     ////////////////////////////////////////////////////////////////////////////
@@ -64,15 +63,34 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 
 
     ////////////////////////////////////////////////////////////////////////////
-    // check URL and set center on Marker
+    // GeoLocation and URL Deeplinking
     ////////////////////////////////////////////////////////////////////////////
 
+    // CHeck if GeoLocation is available
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser");
+    };
+
+    // Check if URL has ID
     if (getUrl === "https://" + cleanURL + "/" || getUrl === "https://" + cleanURL) {
 
-        // Centering Map and repositionig Marker
-        map.setCenter(pos);
-        geoPosition.setPosition(pos);
+        function success(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            // Saving current geo location to Local Storage as a STRING
+            localStorage.setItem('currentPos', JSON.stringify(pos));
 
+            // Centering Map and repositionig Marker
+            geoPosition.setPosition(pos);
+            map.setCenter(pos);
+            map.setZoom(15);
+
+            console.log(pos + " Check Location");
+        };
+
+        // if URL has Marker ID, show Marker and open InfoLayer
     } else {
 
         // loading the Marker related to id on URL ID base
@@ -89,31 +107,22 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
         });
 
         document.getElementById("infobox").style.marginTop = "-" + screenHeight * 0.4 + "px";
-        map.panTo(marker.getPosition());
-        //map.panBy(0, screenHeight / 7);
-        map.setZoom(15);
-    };
 
+        function success(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            // Saving current geo location to Local Storage as a STRING
+            localStorage.setItem('currentPos', JSON.stringify(pos));
 
-    ////////////////////////////////////////////////////////////////////////////
-    // check GeoLocation and set center on users positions
-    ////////////////////////////////////////////////////////////////////////////
+            // Updating Geolocation Marker
+            geoPosition.setPosition(pos);
 
-    if (!navigator.geolocation) {
-        alert("Geolocation is not supported by your browser");
-    };
-
-    function success(position) {
-        var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
         };
-        // Saving current geo location to Local Storage as a STRING
-        localStorage.setItem('currentPos', JSON.stringify(pos));
-
-        // Centering Map and repositionig Marker
-        map.setCenter(pos);
-        geoPosition.setPosition(pos);
+        // Cetering Map on Marker
+        map.panTo(marker.getPosition());
+        map.setZoom(15);
     };
 
     function error() {
@@ -146,13 +155,13 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
             google.maps.event.addListener(marker, "click", function(e) {
 
                 document.getElementById("infobox").style.marginTop = "-" + screenHeight * 0.4 + "px";
+                document.getElementById("title").innerHTML = data.title
+                document.getElementById("description").innerHTML = data.description
+
                 map.panTo(marker.getPosition());
-                //map.panBy(0, screenHeight / 7);
                 map.setZoom(15);
 
                 history.pushState(data, null, "?=" + data["id"]);
-                //infoWindow.setContent(data.description);
-                //infoWindow.open(map, marker);
             });
         })(marker, data);
 
@@ -166,24 +175,38 @@ function initMap() { // BEGIN OF MAP INIT //////////////////////////////////////
 
             //Get a reference to the link on the page
             // with an id of "mylink"
-            var a = document.getElementById("refresh");
+            var reloadClick = document.getElementById("refresh");
 
             //Set code to run when the link is clicked
             // by assigning a function to "onclick"
-            a.onclick = function(position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                // Saving current geo location to Local Storage as a STRING
-                localStorage.setItem('currentPos', JSON.stringify(pos));
+            reloadClick.style.cursor = 'pointer';
+            reloadClick.onclick = function(position) {
 
-                // Centering Map and repositionig Marker
-                map.setCenter(pos);
-                geoPosition.setPosition(pos);
+                if (navigator.geolocation) {
+                    function success(position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        // Saving current geo location to Local Storage as a STRING
+                        localStorage.setItem('currentPos', JSON.stringify(pos));
 
-                return false;
-            }
+                        // Updating Geolocation Marker
+                        geoPosition.setPosition(pos);
+
+                    };
+                    // Cetering Map on Marker
+                    geoPosition.setPosition(pos);
+                    map.setCenter(pos);
+                    map.setZoom(15);
+
+                    console.log(pos + " reloadClick");
+
+
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            };
         }
     };
 

@@ -8,6 +8,21 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', serif;
+}
+
+h1 {
+    float: left;
+    font-family: 'Ultra', serif;
+    line-height: 0.9em;
+    font-size: 300%;
+    margin: 5% 7%;
+}
+
+p#description {
+    float: left;
+    width: 85%;
+    margin: 1% 7%;
 }
 
 #header {
@@ -48,7 +63,7 @@ html, body {
     background-position: center;
     background-size: 35px;
     float: right;
-    margin: 25px 20px 0 0;
+    margin: 30px 20px 0 0;
 }
 
 #meat-map {
