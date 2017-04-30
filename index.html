@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Ultra|Roboto" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/js/globals.js" type="text/javascript"></script>
     <script src="/js/googlemaps.js" type="text/javascript"></script>
@@ -12,14 +13,17 @@
 <body>
     <div id="header">
         <div id="logo">
-        <a onclick="reloadPosition" href="" id="refresh"></a>
+        <div id="refresh">&nbsp;</div>
     </div>
 
     </div>
     <div id="meat-map"></div>
     <div id="infobox">
         <div class="arrow-up"></div>
-        <div id="content"></div>
+        <div id="content">
+            <h1 id="title"></h1>
+            <p id="description"></p>
+        </div>
     </div>
     <!-- Creating Map -->
     <script src="/js/createmap.js" type="text/javascript"></script>
